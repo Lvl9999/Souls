@@ -1,3 +1,35 @@
+
+
+
+local Table1 = {}
+
+for i, v in ipairs(workspace.Item:GetChildren()) do
+    if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position.Y - v.Position.Y < 50 and (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude < 90000 then
+        table.insert(Table1, v);
+    end
+end
+
+local Table2 = {}
+
+for i,v in ipairs(workspace.Item2:GetChildren()) do
+    if v:IsA("Part") and v.Name ~= "SoulSpawn" then
+        table.insert(Table2,v);
+    end
+end
+
+local Table3 = {}
+
+for i,v in ipairs(workspace.Item2:GetChildren()) do
+    if v:IsA("Part") and v.Name == "SoulSpawn" and v.CFrame.Position ~= Vector3.new(-291.166412, -64.5565033, 1667.29993) then
+        table.insert(Table3,v);
+    end
+end
+
+local BigTable = {} for i,v in pairs(Table1) do table.insert(BigTable,v) end for i,v in pairs(Table2) do table.insert(BigTable,v) end for i,v in pairs(Table3) do table.insert(BigTable,v) end for i = #BigTable, 2,-1 do BigTable[i],BigTable[math.random(i)] = BigTable[math.random(i)],BigTable[i] end game:GetService("Players").LocalPlayer.Character:MoveTo(table.remove(BigTable,1).Position);
+
+
+
+
 -- getgenv().SoulFarming = true
 getgenv().Noclip = true
 
@@ -74,8 +106,7 @@ task.spawn(function()
                     end
                 end
 
-                local Targets = {}
-                for i,v in pairs(Table1) do table.insert(Targets,v) end for i,v in pairs(Table2) do table.insert(Targets,v) end for i,v in pairs(Table3) do table.insert(Targets,v) end if #Targets > 0 then game:GetService("Players").LocalPlayer.Character:MoveTo(Targets[math.random(1,#Targets)].Position) end
+                local BigTable = {} for i,v in pairs(Table1) do table.insert(BigTable,v) end for i,v in pairs(Table2) do table.insert(BigTable,v) end for i,v in pairs(Table3) do table.insert(BigTable,v) end for i = #BigTable, 2,-1 do BigTable[i],BigTable[math.random(i)] = BigTable[math.random(i)],BigTable[i] end game:GetService("Players").LocalPlayer.Character:MoveTo(table.remove(BigTable,1).Position);                
                 -------------------------------------------------------
                 for i,v in pairs(workspace.Item:GetDescendants()) do
                     if v:IsA("ProximityPrompt") then
