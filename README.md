@@ -2,7 +2,7 @@
 Made by ThroughTheFireAndFlames#9925
 
 
-Put on autoexec
+## Put on autoexec
 
 ```lua
 getgenv().SoulFarming = true -- true/false  | (true = start),(false = stop)
