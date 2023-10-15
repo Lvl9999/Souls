@@ -3,6 +3,7 @@ Made by ThroughTheFireAndFlames#9925
 
 
 * Put on autoexec
+* ALT ONLY!!!!!
 
 ```lua
 getgenv().SoulFarming = true -- true/false  | (true = start),(false = stop)
