@@ -1,21 +1,21 @@
 --getgenv().SoulFarming = true
-getgenv().Noclip = true
-getgenv().AntiKick = true
 
 repeat wait() until game:IsLoaded();
 wait(1);
 
 task.spawn(function() task.wait(12);
-    local servers = {}
-    for _, server in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
-       if type(server) == "table" and server.maxPlayers > server.playing and server.id ~= game.JobId then
-            table.insert(servers, server.id)
+    if getgenv().SoulFarming == true then
+        local servers = {}
+        for _, server in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+           if type(server) == "table" and server.maxPlayers > server.playing and server.id ~= game.JobId then
+                table.insert(servers, server.id)
+            end
         end
-    end
-    if #servers > 0 then
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)])
-    else
-        print("Couldn't find a server.")
+        if #servers > 0 then
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)])
+        else
+            print("Couldn't find a server.")
+        end
     end
 end)
 wait(0.15);
@@ -23,7 +23,7 @@ wait(0.15);
 repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui");
 
 task.spawn(function()
-    while getgenv().AntiKick == true do wait(3);
+    while getgenv().SoulFarming == true do wait(3);
         pcall(function()
             if game.CoreGui.RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt") then
                 repeat
@@ -68,7 +68,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while getgenv().Noclip == true do wait(0.15);
+    while getgenv().SoulFarming == true do wait(0.15);
         pcall(function()
             for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
                 if v:IsA("BasePart") then
@@ -79,7 +79,9 @@ task.spawn(function()
     end
 end)
 
-game.StarterGui:SetCore("SendNotification", {Title = "Souls Counter  👻";Text = game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls";Duration = 10;});
+if getgenv().SoulFarming == true then
+    game.StarterGui:SetCore("SendNotification", {Title = "Souls Counter  👻";Text = game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls";Duration = 10;});
+end
 task.spawn(function() wait(1);
     while getgenv().SoulFarming == true do
         pcall(function()
