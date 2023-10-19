@@ -1,8 +1,6 @@
 -- getgenv().SoulFarming = true
 
 repeat wait() until game:IsLoaded();
-wait(1);
-
 repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui");
 
 task.spawn(function()
@@ -43,7 +41,6 @@ task.spawn(function() task.wait(12);
         end
     end
 end)
-wait(0.15);
 
 task.spawn(function()
     while getgenv().SoulFarming == true do
@@ -67,10 +64,12 @@ task.spawn(function()
 end)
 
 if getgenv().SoulFarming == true then
-    local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/insanedude59/notiflib/main/main"))();
-    Notif:Notification("Soul Counter  👻",game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls", "GothamSemibold", "Gotham",25);
+    task.spawn(function()
+        local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/insanedude59/notiflib/main/main"))();Notif:Notification("Soul Counter  👻",game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls", "GothamSemibold", "Gotham",25);
+    end)
 end
-task.spawn(function() wait(1);
+
+task.spawn(function()
     while getgenv().SoulFarming == true do
         pcall(function()
             if workspace.Item2:FindFirstChild("SoulSpawn") and workspace.Item2:FindFirstChild("SoulSpawn"):IsA("Part") and workspace.Item2:FindFirstChild("SoulSpawn").CFrame.Position ~= Vector3.new(-291.166412, -64.5565033, 1667.29993) then
