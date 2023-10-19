@@ -48,19 +48,7 @@ wait(0.15);
 task.spawn(function()
     while getgenv().SoulFarming == true do
         pcall(function()
-            for i = 1,10 do wait(0.25); game:GetService("ReplicatedStorage"):WaitForChild("GlobalUsedRemotes"):WaitForChild("Play"):FireServer();
-                local vim = game:GetService('VirtualInputManager')
-                local x = game:GetService('Players').LocalPlayer.PlayerGui.Loading.BG.SkipButton
-                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, true, x, 1);
-                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, false, x, 1);
-
-                local vim = game:GetService('VirtualInputManager')
-                local x = game:GetService('Players').LocalPlayer.PlayerGui.FrontMenu.Play
-
-                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, true, x, 1);
-                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, false, x, 1);
-                wait(0.0015);
-            end
+            game:GetService("ReplicatedStorage"):WaitForChild("GlobalUsedRemotes"):WaitForChild("Play"):FireServer();
         end)
         wait(0.35);
     end
