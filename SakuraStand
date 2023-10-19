@@ -1,9 +1,10 @@
 --getgenv().SoulFarming = true
 
-repeat wait() until game:IsLoaded();
-repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui");
+local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/insanedude59/notiflib/main/main"))();
 
-task.spawn(function()
+repeat wait() until game:IsLoaded();
+
+task.spawn(function() repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui");
     while getgenv().SoulFarming == true do wait(3);
         pcall(function()
             if game.CoreGui.RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt") then
@@ -48,7 +49,7 @@ task.spawn(function()
 end)
 
 if getgenv().SoulFarming == true then
-    game.StarterGui:SetCore("SendNotification", {Title = "Souls Counter  👻";Text = game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls";Duration = 15;});
+    Notif:Notification("Soul Counter  👻",game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls", "GothamSemibold", "Gotham",15);
 end
 task.spawn(function()
     while getgenv().SoulFarming == true do
