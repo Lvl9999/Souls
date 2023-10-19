@@ -1,6 +1,6 @@
 -- getgenv().SoulFarming = true
 
-repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui") or game:IsLoaded();
+repeat wait() until game:IsLoaded() and game.CoreGui:FindFirstChild("RobloxPromptGui");
 
 task.spawn(function()
     while getgenv().SoulFarming == true do wait(3);
