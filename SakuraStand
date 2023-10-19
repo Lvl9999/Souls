@@ -1,4 +1,4 @@
-getgenv().SoulFarming = true
+-- getgenv().SoulFarming = true
 
 repeat wait() until game:IsLoaded();
 wait(1);
