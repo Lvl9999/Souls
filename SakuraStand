@@ -1,11 +1,11 @@
 --getgenv().SoulFarming = true
 
-local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/insanedude59/notiflib/main/main"))();
-
 repeat wait() until game:IsLoaded();
+wait(1);
 
-task.spawn(function() 
 repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui");
+
+task.spawn(function()
     while getgenv().SoulFarming == true do wait(3);
         pcall(function()
             if game.CoreGui.RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt") then
@@ -28,13 +28,42 @@ repeat wait() until game.CoreGui:FindFirstChild("RobloxPromptGui");
     end
 end)
 
+task.spawn(function() task.wait(12);
+    if getgenv().SoulFarming == true then
+        local servers = {}
+        for _, server in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+           if type(server) == "table" and server.maxPlayers > server.playing and server.id ~= game.JobId then
+                table.insert(servers, server.id)
+            end
+        end
+        if #servers > 0 then
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)])
+        else
+            print("Couldn't find a server.")
+        end
+    end
+end)
+wait(0.15);
 
 task.spawn(function()
     while getgenv().SoulFarming == true do
         pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("GlobalUsedRemotes"):WaitForChild("Play"):FireServer();
+            for i = 1,10 do wait(0.25);
+                local vim = game:GetService('VirtualInputManager')
+                local x = game:GetService('Players').LocalPlayer.PlayerGui.Loading.BG.SkipButton
+
+                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, true, x, 1);
+                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, false, x, 1);
+
+                local vim = game:GetService('VirtualInputManager')
+                local x = game:GetService('Players').LocalPlayer.PlayerGui.FrontMenu.Play
+
+                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, true, x, 1);
+                vim:SendMouseButtonEvent(x.AbsolutePosition.X + x.AbsoluteSize.X / 2, x.AbsolutePosition.Y + 50, 0, false, x, 1);
+                wait(0.0015);
+            end
         end)
-        wait(0.45);
+        wait(0.35);
     end
 end)
 
@@ -50,28 +79,12 @@ task.spawn(function()
     end
 end)
 
-task.spawn(function()
-    pcall(function()
-        if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("ItemStorage") and not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("ItemStorage").Enabled then
-            local servers = {}
-            for _, server in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
-                if type(server) == "table" and server.maxPlayers > server.playing and server.id ~= game.JobId then
-                    table.insert(servers, server.id);
-                end
-            end
-            if #servers > 0 then
-                game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)]);
-            else
-                print("Couldn't find a server.");
-            end
-        end
-    end)
-end)
-
 if getgenv().SoulFarming == true then
-    Notif:Notification("Soul Counter  👻",game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls", "GothamSemibold", "Gotham",15);
+local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/insanedude59/notiflib/main/main"))();
+
+Notif:Notification("Soul Counter  👻",game:GetService("Players").LocalPlayer.Data.Soul.Value.." Souls", "GothamSemibold", "Gotham",15);
 end
-task.spawn(function()
+task.spawn(function() wait(1);
     while getgenv().SoulFarming == true do
         pcall(function()
             if workspace.Item2:FindFirstChild("SoulSpawn") and workspace.Item2:FindFirstChild("SoulSpawn"):IsA("Part") and workspace.Item2:FindFirstChild("SoulSpawn").CFrame.Position ~= Vector3.new(-291.166412, -64.5565033, 1667.29993) then
