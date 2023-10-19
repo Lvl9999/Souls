@@ -68,6 +68,15 @@ task.spawn(function()
 end)
 
 task.spawn(function()
+    while getgenv().SoulFarming == true do
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("GlobalUsedRemotes"):WaitForChild("Play"):FireServer();
+        end)
+        wait(0.35);
+    end
+end)
+
+task.spawn(function()
     while getgenv().SoulFarming == true do wait(0.15);
         pcall(function()
             for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
