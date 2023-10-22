@@ -70,6 +70,23 @@ end
 
 task.spawn(function()
     while getgenv().SoulFarming == true do
+        for i,v in pairs(workspace.Item:GetDescendants()) do
+            if v:IsA("ProximityPrompt") then
+                fireproximityprompt(v, 0);
+            end
+        end
+
+        for i,v in pairs(workspace.Item2:GetDescendants()) do
+            if v:IsA("ProximityPrompt") then
+                fireproximityprompt(v, 0);
+            end
+        end
+        wait(0.0015);
+    end
+end)
+
+task.spawn(function()
+    while getgenv().SoulFarming == true do
         pcall(function()
             if workspace.Item2:FindFirstChild("SoulSpawn") and workspace.Item2:FindFirstChild("SoulSpawn"):IsA("Part") and workspace.Item2:FindFirstChild("SoulSpawn").CFrame.Position ~= Vector3.new(-291.166412, -64.5565033, 1667.29993) then
                 local Table2 = {}
@@ -89,18 +106,6 @@ task.spawn(function()
                 end
 
                 local BigTable = {} for i,v in pairs(Table2) do table.insert(BigTable,v)end for i,v in pairs(Table3) do table.insert(BigTable,v) end for i = #BigTable,2, -1 do BigTable[i],BigTable[math.random(i)] = BigTable[math.random(i)],BigTable[i]end game:GetService("Players").LocalPlayer.Character:MoveTo(BigTable[1].Position);
-                -------------------------------------------------------
-                for i,v in pairs(workspace.Item:GetDescendants()) do
-                    if v:IsA("ProximityPrompt") then
-                        fireproximityprompt(v, 0);
-                    end
-                end
-
-                for i,v in pairs(workspace.Item2:GetDescendants()) do
-                    if v:IsA("ProximityPrompt") then
-                        fireproximityprompt(v, 0);
-                    end
-                end
             else
                 if not getgenv().Rejoined == true then
                     pcall(function()
